@@ -1,24 +1,33 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import logo from "./logo.svg";
+import "./App.css";
+import List from "./components/list";
+import AddToList from "./components/AddToLis";
+
+export interface IState {
+  people: {
+    name: string;
+    age: number;
+    url: string;
+    note?: string;
+  }[];
+}
 
 function App() {
+  const [people, setPeople] = useState<IState["people"]>([
+    {
+      name: "Messi",
+      age: 30,
+      url: "https://sportbild.bild.de/fotos-skaliert/der-aktuelle-vertrag-von-lionel-messi-beim-fc-barcelona-laeuft-am-1-juli-2021-aus-fd9442bf1b6445a08cebfa28decfb697-76932054/8,w=993,c=0.sport.jpg",
+      note: "random note",
+    },
+  ]);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>List of People</h1>
+      <List people={people} />
+      <AddToList people={people} setPeople={setPeople} />
     </div>
   );
 }
